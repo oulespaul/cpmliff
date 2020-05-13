@@ -74,9 +74,9 @@
         } = await liff.getProfile();
 
         document.getElementById("pictureUrl").src = pictureUrl;
-        document.getElementById("userId").append = userId;
-        document.getElementById("statusMessage").append = statusMessage;
-        document.getElementById("displayName").append = displayName;
+        document.getElementById("userId").append(userId);
+        document.getElementById("statusMessage").append(statusMessage);
+        document.getElementById("displayName").append(displayName);
       }
 
       function getEnvironment() {
