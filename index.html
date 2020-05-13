@@ -77,6 +77,9 @@
         document.getElementById("userId").append(userId);
         document.getElementById("statusMessage").append(statusMessage);
         document.getElementById("displayName").append(displayName);
+        document
+          .getElementById("decodeedIDToken")
+          .append(liff.getDecodeedIDToken().email());
       }
 
       function getEnvironment() {
