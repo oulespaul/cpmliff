@@ -79,7 +79,7 @@
         document.getElementById("displayName").append(displayName);
         document
           .getElementById("decodedIDToken")
-          .append(liff.getDecodedIDToken().email());
+          .append(liff.getDecodedIDToken().email);
       }
 
       function getEnvironment() {
@@ -101,7 +101,7 @@
         await liff.init({ liffId: "1654204120-jydGN9o9" });
         getEnvironment();
         getUserProfile();
-        // getContext()
+        getContext();
         // getFriendship()
         // createUniversalLink()
       }
