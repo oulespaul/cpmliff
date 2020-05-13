@@ -59,7 +59,15 @@
 
       function openWindow() {}
 
-      async function getFriendship() {}
+      async function getFriendship() {
+        const friend = await liff.getFriendship();
+        document.getElementById("friendship").append(friend.friendFlag);
+        if (!friend.friendFlag) {
+          if (confirm("ยังไม่ได้เป็นเพื่อนกับ Bot ของเรา")) {
+            window.location = "https://line.me/R/ti/p/@442jakse";
+          }
+        }
+      }
 
       async function sendMsg() {
         if (liff.getContext().type !== "none") {
@@ -119,7 +127,7 @@
         getEnvironment();
         getUserProfile();
         getContext();
-        // getFriendship()
+        getFriendship();
         // createUniversalLink()
       }
       main();
