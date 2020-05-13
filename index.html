@@ -148,17 +148,18 @@
       }
 
       async function main() {
+        liff.ready(() => {
+          document.getElementById("isLoggedIn").append(liff.isLoggedIn());
+          if (liff.isLoggedIn()) {
+            getEnvironment();
+            getUserProfile();
+            getContext();
+            getFriendship();
+          } else {
+            liff.login();
+          }
+        });
         await liff.init({ liffId: "1654204120-jydGN9o9" });
-        document.getElementById("isLoggedIn").append(liff.isLoggedIn());
-        if (liff.isLoggedIn()) {
-          getEnvironment();
-          getUserProfile();
-          getContext();
-          getFriendship();
-        } else {
-          liff.login();
-        }
-
         // createUniversalLink()
       }
       main();
