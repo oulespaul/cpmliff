@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-  <title>Path</title>
-  <link rel="stylesheet" href="css/style.css" media="all">
-</head>
-<body>
-  <h1>Hello World!</h1>
-  <p id="param"><b>Query Param: </b></p>
-  <img id="pictureUrl">
-  <p id="userId"><b>userId:</b> </p>
-  <p id="displayName"><b>displayName:</b> </p>
-  <p id="statusMessage"><b>statusMessage:</b> </p>
-  <p id="decodedIDToken"><b>email:</b> </p>
-  <script>
-    // Query Params
-    const queryString = decodeURIComponent(window.location.search);
-    const params = new URLSearchParams(queryString);
-    document.getElementById("param").append(params.get("param"));
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
+    <title>Path</title>
+    <link rel="stylesheet" href="css/style.css" media="all" />
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <p id="param"><b>Query Param: </b></p>
+    <img id="pictureUrl" />
+    <p id="userId"><b>userId:</b></p>
+    <p id="displayName"><b>displayName:</b></p>
+    <p id="statusMessage"><b>statusMessage:</b></p>
+    <p id="decodedIDToken"><b>email:</b></p>
+
+    <script>
+      // Query Params
+      const queryString = decodeURIComponent(window.location.search);
+      const params = new URLSearchParams(queryString);
+      document.getElementById("param").append(params.get("param"));
+    </script>
+
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.1.13/sdk.js"></script>
+
+    <script>
+      async function getUserProfile() {
+        const {
+          pictureUrl,
+          userId,
+          displayName,
+          statusMessage,
+        } = await liff.getProfile();
+
+        document.getElementById("pictureUrl").src = pictureUrl;
+        document.getElementById("userId").append(userId);
+        document.getElementById("statusMessage").append(statusMessage);
+        document.getElementById("displayName").append(displayName);
+        document
+          .getElementById("decodedIDToken")
+          .append(liff.getDecodedIDToken().email);
+      }
+
+      async function main() {
+        await liff.init({ liffId: "1654204120-jydGN9o9" });
+        if (liff.isLoggedIn()) {
+          getUserProfile();
+        } else {
+          liff.login({
+            redirectUri: "https://oulespaul.github.io/cpmliff/path",
+          });
+        }
+      }
+    </script>
+  </body>
 </html>
